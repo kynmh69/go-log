@@ -28,6 +28,7 @@ func (l *Logger) print(level Level, msg string) {
 	printArr = append(printArr, l.Now(l.LogFormat))
 	printArr = append(printArr, fmt.Sprintf("[%s]", level.String()))
 	printArr = append(printArr, msg)
+
 	for i, str := range printArr {
 		printStr += str
 		if i == len(printArr)-1 {
