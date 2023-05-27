@@ -2,7 +2,6 @@ package logging
 
 import (
 	"fmt"
-	"io"
 	"os"
 	"time"
 )
@@ -10,7 +9,7 @@ import (
 // Create file stream.
 // Output log to file stream.
 // if you wanna output default filepath, please set "" to argument.
-func CreateFileStream(filePath string) (io.Writer, error) {
+func CreateFileStream(filePath string) (*os.File, error) {
 	if filePath == "" {
 		datetime := time.Now()
 		fileName := fmt.Sprintf("log-%s", datetime.Format(time.DateOnly))

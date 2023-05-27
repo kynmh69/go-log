@@ -13,6 +13,8 @@ func main() {
 	if err != nil {
 		log.Fatalln("Cannot open file.", err.Error())
 	}
+	defer fp.Close()
+
 	// Logger initilize.
 	log := logging.New([]io.Writer{os.Stdout, fp})
 	// set log level
