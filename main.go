@@ -1,13 +1,20 @@
 package main
 
-import "log"
+import "kynmh69/logging/logging"
 
-var logging log.Logger
-
-func main()  {
+func main() {
 	// Logger initilize.
-	logging = log.Logger{}
+	log := logging.Logger{}
+	log.InitLogger()
+	// set log level
+	level := logging.INFO
 	// open env file
 	// Logger output file and std stream.
-
+	// test log
+	log.LogLevel = level
+	log.Debug("aaa")
+	log.Info("bbb")
+	log.Warning("ccc")
+	log.Error("ddd")
+	log.Critical("eee")
 }

@@ -3,12 +3,17 @@ package logging
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 )
 
 type Logger struct {
 	logger   log.Logger
-	logLevel Level
+	LogLevel Level
+}
+
+func (l *Logger) InitLogger() {
+	l.logger = *log.New(os.Stdout, "", log.Lshortfile)
 }
 
 func (l *Logger) print(level Level, msg string) {
@@ -31,32 +36,32 @@ func (l *Logger) print(level Level, msg string) {
 }
 
 func (l *Logger) Debug(msg string) {
-	if l.logLevel == DEBUG {
+	if l.LogLevel <= DEBUG {
 		l.print(DEBUG, msg)
 	}
 }
 
 func (l *Logger) Info(msg string) {
-	if l.logLevel == INFO {
+	if l.LogLevel <= INFO {
 		l.print(INFO, msg)
 	}
 }
 
 func (l *Logger) Warning(msg string) {
-	if l.logLevel == WARNING {
+	if l.LogLevel <= WARNING {
 		l.print(WARNING, msg)
 	}
 }
 
 func (l *Logger) Error(msg string) {
-	if l.logLevel == ERROR {
+	if l.LogLevel <= ERROR {
 		l.print(ERROR, msg)
 	}
 }
 
 func (l *Logger) Critical(msg string) {
-	if l.logLevel == CRITICAL {
-		l.logger.Println(CRITICAL, msg)
+	if l.LogLevel <= CRITICAL {
+		l.print(CRITICAL, msg)
 	}
 }
 
