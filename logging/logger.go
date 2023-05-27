@@ -27,7 +27,7 @@ func (l *Logger) print(level Level, msg string) {
 	printArr := []string{}
 
 	printArr = append(printArr, l.now(l.LogFormat))
-	printArr = append(printArr, fmt.Sprintf("[%8s]", level.String()))
+	printArr = append(printArr, fmt.Sprintf("[%s]", level.String()))
 	printArr = append(printArr, msg)
 
 	for i, str := range printArr {
