@@ -18,7 +18,6 @@ func main() {
 	// set log level
 	level := logging.DEBUG
 	// open env file
-	// Logger output file and std stream.
 	// test log
 	log.LogLevel = level
 	log.Debug("aaa")

@@ -9,6 +9,7 @@ import (
 
 // Create file stream.
 // Output log to file stream.
+// if you wanna output default filepath, please set "" to argument.
 func CreateFileStream(filePath string) (io.Writer, error) {
 	if filePath == "" {
 		datetime := time.Now()
