@@ -28,8 +28,8 @@ func (l *Logger) print(level Level, msg string) {
 	printArr = append(printArr, l.Now(l.LogFormat))
 	printArr = append(printArr, fmt.Sprintf("[%s]", level.String()))
 	printArr = append(printArr, msg)
-	for i := 0; i < len(printArr); i++ {
-		printStr += printArr[i]
+	for i, str := range printArr {
+		printStr += str
 		if i == len(printArr)-1 {
 			// 最後にスペースは追加しない
 			break
@@ -73,11 +73,11 @@ func (l *Logger) Critical(msg string) {
 }
 
 func (l *Logger) Now(format string) string {
-	time := time.Now()
+	t := time.Now()
 
 	if format == "" {
-		format = "2006-01-02 15:04:05"
+		format = fmt.Sprintf("%s.000", time.DateTime)
 	}
 
-	return time.Format(format)
+	return t.Format(format)
 }
