@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"os"
 	"time"
 )
 
@@ -16,10 +17,40 @@ type Logger struct {
 // Logger initialize any writer.
 func New(streams []io.Writer) *Logger {
 	l := &Logger{}
+	fp, logLevel := loadEnv()
+
+	if fp != nil {
+		streams = append(streams, fp)
+	}
+
+	l.LogLevel = logLevel
+
 	for _, stream := range streams {
 		l.Logger = append(l.Logger, *log.New(stream, "", log.Lshortfile))
 	}
 	return l
+}
+
+func loadEnv() (*os.File, Level) {
+	var fp *os.File
+
+	OpenEnv()
+	logLevelStr := os.Getenv("LOG_LEVEL")
+	logFilePath := os.Getenv("LOG_FILE_PATH")
+	logLevel, err := ConvertLevel(logLevelStr)
+
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	if logFilePath != "" {
+		fp, err = os.OpenFile(logFilePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	}
+
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	return fp, logLevel
 }
 
 func (l *Logger) print(level Level, msg string) {

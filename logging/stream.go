@@ -2,8 +2,11 @@ package logging
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 // Create file stream.
@@ -18,4 +21,11 @@ func CreateFileStream(filePath string) (*os.File, error) {
 
 	fp, err := os.OpenFile(filePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
 	return fp, err
+}
+
+func OpenEnv() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalln("Cannot load .env.", err.Error())
+	}
 }
