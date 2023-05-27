@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"kynmh69/logging/logging"
 	"log"
@@ -10,18 +9,14 @@ import (
 )
 
 func main() {
-	datetime := time.Now()
-	fileName := fmt.Sprintf("log-%s", datetime.Format(time.DateOnly))
-	filePath := fmt.Sprintf("./log/%s.log", fileName)
-
-	fp, err := os.OpenFile(filePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0660)
+	fp, err := logging.CreateFileStream("")
 	if err != nil {
 		log.Fatalln("Cannot open file.", err.Error())
 	}
 	// Logger initilize.
 	log := logging.New([]io.Writer{os.Stdout, fp})
 	// set log level
-	level := logging.INFO
+	level := logging.DEBUG
 	// open env file
 	// Logger output file and std stream.
 	// test log

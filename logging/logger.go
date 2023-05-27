@@ -13,6 +13,7 @@ type Logger struct {
 	LogFormat string
 }
 
+// Logger initialize any writer.
 func New(streams []io.Writer) *Logger {
 	l := &Logger{}
 	for _, stream := range streams {
@@ -25,7 +26,7 @@ func (l *Logger) print(level Level, msg string) {
 	printStr := ""
 	printArr := []string{}
 
-	printArr = append(printArr, l.Now(l.LogFormat))
+	printArr = append(printArr, l.now(l.LogFormat))
 	printArr = append(printArr, fmt.Sprintf("[%s]", level.String()))
 	printArr = append(printArr, msg)
 
@@ -73,7 +74,7 @@ func (l *Logger) Critical(msg string) {
 	}
 }
 
-func (l *Logger) Now(format string) string {
+func (l *Logger) now(format string) string {
 	t := time.Now()
 
 	if format == "" {
