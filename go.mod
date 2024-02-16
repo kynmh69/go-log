@@ -1,4 +1,4 @@
-module kynmh69/logging
+module kynmh69/go-log
 
 go 1.20
 
