@@ -2,7 +2,7 @@ package main
 
 import (
 	"io"
-	"github.cokm/kynmh69/go-log"
+	"github.com/kynmh69/go-log/logging"
 	"log"
 	"os"
 	"time"
