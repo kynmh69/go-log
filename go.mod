@@ -1,4 +1,4 @@
-module kynmh69/go-log
+module github.com/kynmh69/go-log
 
 go 1.20
 
